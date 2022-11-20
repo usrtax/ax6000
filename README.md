@@ -107,6 +107,29 @@ reboot
 
 ![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/qu0JKj.png)
 
+7. 安装 clash
+
+通过 SSH 连接上小米 AX6000 执行安装下面的命令（请不要使用 telnet 连接安装 ShellClash，否则会乱码）
+
+```
+export url='https://raw.fastgit.org/juewuy/ShellClash/master' && sh -c "$(curl -kfsSl $url/install.sh)" && source /etc/profile &> /dev/null
+```
+
+所有问题都输入 1
+
+安装后输入 clash ，配置参考下图
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/UlAP62.png)
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/kO1kNp.png)
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/RytDcr.png)
+
+然后设置定期更新重启
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/vU9H9f.png)
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/JXMfDQ.png)
+
+访问 http:// 路由器 ip:9999/ui/#/proxies 可以进行 clash 管理
+
 ## 参考教程
 
 1. [刷机视频步骤](https://www.youtube.com/watch?v=AkBrLBjpc_k)
