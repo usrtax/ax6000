@@ -103,7 +103,7 @@ reboot
 
 如果重置了路由器，密码会回复为默认密码。
 
-可以通过 SN 获取默认 root 账号的密码（SN 码在路由器底部或路由器管理页面能查看到）
+可以通过 [SN 密码计算器](./SN.zip) 获取默认 root 账号的密码（SN 码在路由器底部或路由器管理页面能查看到）
 
 ![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/qu0JKj.png)
 
