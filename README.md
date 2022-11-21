@@ -150,6 +150,10 @@ export url='https://raw.fastgit.org/juewuy/ShellClash/master' && sh -c "$(curl -
 
 ![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/fjVdxf.png)
 
+可能需要重新装一下面板，以刷新后台 ip, 重新装面板如下图
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/Lgpro4.png)
+
 ## 参考教程
 
 1. [刷机视频步骤](https://www.youtube.com/watch?v=AkBrLBjpc_k)
