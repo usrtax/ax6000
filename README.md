@@ -130,6 +130,26 @@ export url='https://raw.fastgit.org/juewuy/ShellClash/master' && sh -c "$(curl -
 
 访问 http:// 路由器 ip:9999/ui/#/proxies 可以进行 clash 管理
 
+## 爱快配置
+
+设置 Lan1 ip 地址为 192.168.31.3
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/VM1I5d.png)
+
+小米路由器设置如下
+
+先修改 IP 地址为 192.168.3.1
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/sKc02c.png)
+
+然后修改 DHCP 默认网关为 192.168.3.1
+
+接下来访问 http://192.168.3.1
+
+上网设置如下，其中 192.168.31.3 是在爱快中设置的 IP
+
+![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/fjVdxf.png)
+
 ## 参考教程
 
 1. [刷机视频步骤](https://www.youtube.com/watch?v=AkBrLBjpc_k)
