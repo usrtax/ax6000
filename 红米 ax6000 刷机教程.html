@@ -1325,79 +1325,36 @@ reboot</code></pre>
 <p>这会设置 ssh root 用户的密码为 gooutgfw 
 并永久开启 SSH、并从开发模式修改回正常的模式，并重启。</p>
 <p>等待重启完成后就能连上 ssh 了。</p>
+<p>如果重置了路由器，密码会回复为默认密码。</p>
+<p>可以通过 <a href="./SN.zip">SN 密码计算器</a> 获取默认 root 账号的密码（SN 码在路由器底部或路由器管理页面能查看到）</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/qu0JKj.png"></p>
 <ol start="7">
-<li>在 上网设置-&gt; 工作模式切换 中 改为无线中续</li>
+<li>安装 clash</li>
 </ol>
-<p>然后就可以上网了</p>
-<p>找到新的 ip,ssh 上去</p>
-<p><code>cat /proc/cmdline</code></p>
-<p>查看 firmware= 多少</p>
-<p>如果是 0 执行</p>
-<pre><code class="fenced-code-block">nvram set boot_wait=on
-nvram set uart_en=1
-nvram set flag_boot_rootfs=1
-nvram set flag_last_success=1
-nvram set flag_boot_success=1
-nvram set flag_try_sys1_failed=0
-nvram set flag_try_sys2_failed=0
-nvram commit
-cd /tmp
-curl -L http://sebs.oss-cn-shanghai.aliyuncs.com/initramfs-factory.ubi -o initramfs-factory.ubi
-ubiformat /dev/mtd9 -y -f /tmp/initramfs-factory.ubi
-reboot -f</code></pre>
-<p>如果是 1 执行</p>
-<pre><code class="fenced-code-block">nvram set boot_wait=on
-nvram set uart_en=1
-nvram set flag_boot_rootfs=0
-nvram set flag_last_success=0
-nvram set flag_boot_success=1
-nvram set flag_try_sys1_failed=0
-nvram set flag_try_sys2_failed=0
-nvram commit
-cd /tmp
-curl -L http://sebs.oss-cn-shanghai.aliyuncs.com/initramfs-factory.ubi -o initramfs-factory.ubi
-ubiformat /dev/mtd8 -y -f /tmp/initramfs-factory.ubi
-reboot -f</code></pre>
-<p>复制执行完就会重启进入过渡固件，过渡固件的</p>
-<p>无线网名称 : OpenWrt
-无线网密码 : password
-管理后台 : <a href="http://192.168.5.1">http://192.168.5.1</a>
-用户名和密码 : root/password 或者 admin/password</p>
-<p>进去管理后台，点 服务-&gt; 终端</p>
-<p>输入 root 回车
-输入 passoword 回车</p>
-<p>然后再粘贴下面的代码</p>
-<pre><code class="fenced-code-block">fw_setenv boot_wait on
-fw_setenv uart_en 1
-fw_setenv flag_boot_rootfs 0
-fw_setenv flag_last_success 1
-fw_setenv flag_boot_success 1
-fw_setenv flag_try_sys1_failed 8
-fw_setenv flag_try_sys2_failed 8</code></pre>
-<p>然后打开系统-备份与升级，选择刷写固件。浏览里找到下载好的 openwrt 固件，选择上传。上传好后选择取消勾选保留当前配置然后选择继续。等待刷写完成自动重启 (5 分钟左右)，就会进入新的 openwrt 固件。</p>
-<p>新的无线网络名称是 Redmi_AX6000_5G
-固件后台地址是 192.168.6.1 用户名和密码依然是 root 和 password，默认的网口 1 是 wan 口，剩下的都是 lan 口。</p>
-<p>为了安全性访问 <a href="http://192.168.6.1/cgi-bin/luci/admin/system/admin">http://192.168.6.1/cgi-bin/luci/admin/system/admin</a> 修改密码</p>
-<p>访问 <a href="http://192.168.6.1/cgi-bin/luci/admin/network/wifi">http://192.168.6.1/cgi-bin/luci/admin/network/wifi</a> 点基本配置，修改网络名称和密码，加密方式选 WPA2PSK</p>
-<p>另外可以配置无线中续</p>
-<p>访问 <a href="http://192.168.6.1/cgi-bin/luci/admin/services/openclash/config-subscribe">http://192.168.6.1/cgi-bin/luci/admin/services/openclash/config-subscribe</a></p>
-<p>添加 clashx 订阅，勾上自动更新，更新模式选择循环</p>
-<p>点击 <a href="http://192.168.6.1/cgi-bin/luci/admin/services/openclash">http://192.168.6.1/cgi-bin/luci/admin/services/openclash</a> 底部的启动 OpenClash</p>
-<p>然后点击 Dashboard 控制面板 旁边的打开控制面板</p>
-<p>访问 <a href="http://192.168.6.1/cgi-bin/luci/admin/services/openclash/settings">http://192.168.6.1/cgi-bin/luci/admin/services/openclash/settings</a>
-可以选上 实验性：绕过中国大陆 IP
-可以取消 禁用 QUIC</p>
-<p>然后到页面最底部，点击保存配置，再点应用配置</p>
-<p>在 <a href="http://192.168.6.1/cgi-bin/luci/admin/network/network">http://192.168.6.1/cgi-bin/luci/admin/network/network</a> 中，有个名为 WAN6 的接口，删除掉</p>
-<p>在 <a href="http://192.168.6.1/cgi-bin/luci/admin/network/network/wan">http://192.168.6.1/cgi-bin/luci/admin/network/network/wan</a> ，取消使用内置的 ipv6 管理，然后点保存 &amp; 应用</p>
-<p>在 <a href="http://192.168.6.1/cgi-bin/luci/admin/network/network/lan">http://192.168.6.1/cgi-bin/luci/admin/network/network/lan</a> ，拉到页面底部，点 ipv6 设置，全部禁用，然后点保存 &amp; 应用</p>
-<p>在 <a href="http://192.168.6.1/cgi-bin/luci/admin/network/turboacc">http://192.168.6.1/cgi-bin/luci/admin/network/turboacc</a> ，勾上设置 BBR 拥塞控制</p>
+<p>通过 SSH 连接上小米 AX6000 执行安装下面的命令（请不要使用 telnet 连接安装 ShellClash，否则会乱码）</p>
+<pre><code class="fenced-code-block">export url='https://raw.fastgit.org/juewuy/ShellClash/master' &amp;&amp; sh -c "$(curl -kfsSl $url/install.sh)" &amp;&amp; source /etc/profile &amp;&gt; /dev/null</code></pre>
+<p>所有问题都输入 1</p>
+<p>安装后输入 clash ，配置参考下图</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/UlAP62.png">
+<img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/kO1kNp.png">
+<img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/RytDcr.png"></p>
+<p>然后设置定期更新重启</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/vU9H9f.png">
+<img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/JXMfDQ.png"></p>
+<p>访问 http:// 路由器 ip:9999/ui/#/proxies 可以进行 clash 管理</p>
+<h2 class="atx" id="爱快配置">爱快配置</h2>
+<p>设置 Lan1 ip 地址为 192.168.31.3</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/VM1I5d.png"></p>
+<p>小米路由器设置如下</p>
+<p>先修改 IP 地址为 192.168.3.1</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/sKc02c.png"></p>
+<p>然后修改 DHCP 默认网关为 192.168.3.1</p>
+<p>接下来访问 <a href="http://192.168.3.1">http://192.168.3.1</a></p>
+<p>上网设置如下，其中 192.168.31.3 是在爱快中设置的 IP</p>
+<p><img alt="" src="https://raw.githubusercontent.com/gcxfd/img/gh-pages/fjVdxf.png"></p>
 <h2 class="atx" id="参考教程">参考教程</h2>
 <ol>
-<li><a href="https://qust.me/post/ax6000-openwrt">红米 ax6000 刷 openwrt 教程，终于有完善好用的 openwrt 了</a> </li>
-<li><a href="https://www.youtube.com/watch?v=AkBrLBjpc_k">刷机视频步骤 1</a></li>
-<li><a href="https://www.youtube.com/watch?v=FCvCTyjoeq4">刷机视频步骤 2</a></li>
-<li><a href="https://www.right.com.cn/forum/thread-8261104-1-1.html">固件新版本下载</a></li>
+<li><a href="https://www.youtube.com/watch?v=AkBrLBjpc_k">刷机视频步骤</a></li>
 </ol>
 </article>
 </body>
