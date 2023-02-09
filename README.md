@@ -154,6 +154,10 @@ export url='https://raw.fastgit.org/juewuy/ShellClash/master' && sh -c "$(curl -
 
 ![](https://raw.githubusercontent.com/gcxfd/img/gh-pages/Lgpro4.png)
 
+配置CN IP不走代理
+
+![3WlP5k](https://raw.githubusercontent.com/gcxfd/img/gh-pages/3WlP5k.png)
+
 ## 参考教程
 
 1. [刷机视频步骤](https://www.youtube.com/watch?v=AkBrLBjpc_k)
